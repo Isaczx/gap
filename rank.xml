@@ -26,16 +26,16 @@
             <dia>
                 <numero>2</numero>
                 <turno_do_funcionario>
-                    <turno>Manhã</turno>
+                    <turno>Tarde</turno>
                     <vendas>
                         <venda>
-                            <funcionario>Wander</funcionario>
+                            <funcionario>Isac</funcionario>
                             <quantidade_litros>500</quantidade_litros>
                             <valor_vendido>1000</valor_vendido>
                             <comissao>50</comissao>
                         </venda>
                         <venda>
-                            <funcionario>Matheus</funcionario>
+                            <funcionario>Caio</funcionario>
                             <quantidade_litros>700</quantidade_litros>
                             <valor_vendido>1400</valor_vendido>
                             <comissao>70</comissao>
