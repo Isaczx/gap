@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela de Vendas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Tabela de Vendas</h1>
+    
+    <label for="filtroMes">Mês:</label>
+<select id="filtroMes" onchange="filtrarVendas()">
+    <option value="">Todos</option>
+    <option value="Janeiro">Janeiro</option>
+    <option value="Fevereiro">Fevereiro</option>
+    <!-- Adicione opções para os outros meses -->
+</select>
+
+<label for="filtroDia">Dia:</label>
+<select id="filtroDia" onchange="filtrarVendas()">
+    <option value="">Todos</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <!-- Adicione opções para os outros dias -->
+</select>
+
+<label for="filtroTurno">Turno:</label>
+<select id="filtroTurno" onchange="filtrarVendas()">
+    <option value="">Todos</option>
+    <option value="Manhã">Manhã</option>
+    <option value="Tarde">Tarde</option>
+    <option value="Noite">Noite</option>
+</select>
+
+    <div class="table-responsive">
+        <table id="tabela-vendas">
+            <thead>
+                <tr>
+                    <th>Mês</th>
+                    <th>Dia</th>
+                    <th>Turno</th>
+                    <th>Funcionário</th>
+                    <th id="litros">Litros</th>
+                    <th>Valor (R$)</th>
+                    <th>Comissão (R$)</th>
+                </tr>
+            </thead>
+            <tbody id="corpo-tabela">
+                <!-- Os dados das vendas serão inseridos aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
