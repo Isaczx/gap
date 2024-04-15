@@ -1,111 +1,158 @@
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        processarXML(this);
-    }
-};
-xhttp.open("GET", "rank.xml", true);
-xhttp.send();
+var vendasData = {}; // Variável global para armazenar os dados das vendas
+var meses = vendasData.vendas;
+var frentistas = [];
+var dados = [];
 
-function processarXML(xml) {
-    var xmlDoc = xml.responseXML;
-    var vendasOrdenadas = []; // Array para armazenar as vendas ordenadas
+var inputM = document.querySelector("#filtroMes");
 
-    var mesDoAno = xmlDoc.getElementsByTagName("mes_do_ano");
-    for (var i = 0; i < mesDoAno.length; i++) {
-        var mes = mesDoAno[i].getElementsByTagName("mes")[0].textContent;
-        var dia = mesDoAno[i].getElementsByTagName("numero")[0].textContent;
-        var turno = mesDoAno[i].getElementsByTagName("turno")[0].textContent;
-        var vendas = mesDoAno[i].getElementsByTagName("venda");
-        for (var j = 0; j < vendas.length; j++) {
-            var funcionario = vendas[j].getElementsByTagName("funcionario")[0].textContent;
-            var litros = parseFloat(vendas[j].getElementsByTagName("quantidade_litros")[0].textContent); // Converter para número
-            var valor = parseFloat(vendas[j].getElementsByTagName("valor_vendido")[0].textContent); // Converter para número
-            var comissao = parseFloat(vendas[j].getElementsByTagName("comissao")[0].textContent); // Converter para número
+console.log(inputM)
 
-            // Adicionar a venda ao array de vendas ordenadas
-            vendasOrdenadas.push({ mes: mes, dia: dia, turno: turno, funcionario: funcionario, litros: litros, valor: valor, comissao: comissao });
-        }
+inputM.addEventListener("change", () => {
+
+    if(inputM.value == "todos"){
+       
+        carregarDadosVendas()
+    }else{
+        limparTabela();
     }
 
-    // Ordenar as vendas pelo número de litros (do maior para o menor)
-    vendasOrdenadas.sort(function(a, b) {
-        return b.litros - a.litros;
-    });
 
-    // Limpar o corpo da tabela antes de adicionar as linhas
-    var corpoTabela = document.getElementById("corpo-tabela");
-    corpoTabela.innerHTML = "";
+})
 
-    // Adicionar as vendas ordenadas à tabela
-    vendasOrdenadas.forEach(function(venda) {
-        var novaLinha = corpoTabela.insertRow();
-        novaLinha.insertCell().textContent = venda.mes;
-        novaLinha.insertCell().textContent = venda.dia;
-        novaLinha.insertCell().textContent = venda.turno;
-        novaLinha.insertCell().textContent = venda.funcionario;
-        novaLinha.insertCell().textContent = venda.litros;
-        novaLinha.insertCell().textContent = venda.valor;
-        novaLinha.insertCell().textContent = venda.comissao;
-    });
-}
-
-
-
-
-function filtrarVendas() {
-    var filtroMes = document.getElementById("filtroMes").value;
-    var filtroDia = document.getElementById("filtroDia").value;
-    var filtroTurno = document.getElementById("filtroTurno").value;
-
-    var linhasTabela = document.querySelectorAll("#corpo-tabela tr");
-
-    for (var i = 0; i < linhasTabela.length; i++) {
-        var linha = linhasTabela[i];
-        var celulas = linha.getElementsByTagName("td");
-
-        var mes = celulas[0].innerHTML;
-        var dia = celulas[1].innerHTML;
-        var turno = celulas[2].innerHTML;
-
-        if (filtroMes === "" || mes === filtroMes) {
-            if (filtroDia === "" || dia === filtroDia) {
-                if (filtroTurno === "" || turno === filtroTurno) {
-                    linha.style.display = "";
-                } else {
-                    linha.style.display = "none";
-                }
+function carregarDadosVendas() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4) {
+            if (this.status == 200) {
+                vendasData = JSON.parse(this.responseText);
+                console.log("Dados de vendas carregados:", vendasData);
+                FiltroTodos();
+                
             } else {
-                linha.style.display = "none";
+                console.error("Erro ao carregar dados de vendas:", this.status);
             }
-        } else {
-            linha.style.display = "none";
         }
-    }
+    };
+    xhttp.open("GET", "vendas.json", true);
+    xhttp.send();
+}
+
+carregarDadosVendas(); // Chamar a função para carregar os dados de vendas ao carregar a página
+
+
+
+
+
+
+function FiltroTodos() {
+    
+        var meses = vendasData.vendas;
+        for(var m = 0; m < meses.length; m++){
+            var mes = meses[m];
+            var dias = mes.dias;
+
+            for(var d = 0; d < dias.length; d++){
+                var dia = dias[d];
+                var turnos = dia.turnos
+
+                dia.turnos.forEach(turno => {
+                    var funcionarios = turno.vendedores;
+            
+                    funcionarios.forEach(TotalLitros =>{
+                        var nome = TotalLitros.nome;
+                        var litros = TotalLitros.quantidade_litros;
+                        var valor = TotalLitros.valor_vendido;
+                        
+                        var novoItem = {
+                            mes: mes.mes,
+                            dia: dia.dia,
+                            turno: turno.turno,
+                            nome: nome,
+                            litros: litros,
+                            valor: valor
+                        };
+
+                        dados.push(novoItem);
+                        
+                       
+                    })    
+                })
+               
+            }
+        }
+        todos(dados);
 }
 
 
-function ordenarPorLitros() {
-    // Selecionar as células da coluna de litros
-    var celulasLitros = document.querySelectorAll("#corpo-tabela td:nth-child(5)");
+console.log(dados)
 
-    // Converter as células da coluna de litros em uma matriz de valores
-    var valoresLitros = [];
-    for (var i = 0; i < celulasLitros.length; i++) {
-        valoresLitros.push(parseFloat(celulasLitros[i].textContent)); // Converter para número
-    }
+function adicionarLinhaTabela(turno, funcionario, litros, valor, comissao) {
+    var corpoTabela = document.getElementById("corpo-tabela");
 
-    // Ordenar a matriz de valores de litros
-    valoresLitros.sort(function(a, b) {
-        return b - a; // Ordenar do maior para o menor
+    var novaLinha = corpoTabela.insertRow();
+
+    
+
+    var celulaTurno = novaLinha.insertCell();
+    celulaTurno.textContent = turno;
+
+    var celulaFuncionario = novaLinha.insertCell();
+    celulaFuncionario.textContent = funcionario;
+
+    var celulaLitros = novaLinha.insertCell();
+    celulaLitros.textContent = litros;
+
+    var celulaValor = novaLinha.insertCell();
+    celulaValor.textContent = valor;
+
+    var celulaComissao = novaLinha.insertCell();
+    celulaComissao.textContent = comissao;
+}
+
+function limparTabela() {
+    var corpoTabela = document.getElementById("corpo-tabela");
+    corpoTabela.innerHTML = ""; // Define o conteúdo do corpo da tabela como vazio
+}
+
+function todos(dados) {
+    var totaisPorNome = {}; // Usando um objeto em vez de um array
+    var dadosCombinados = [];
+
+    dados.forEach(function(item) {
+        var nome = item.nome;
+        
+        if (totaisPorNome[nome]) {
+            // Se já existir, atualize os totais existentes
+            totaisPorNome[nome].litros += item.litros;
+            totaisPorNome[nome].valor += item.valor;
+        } else {
+            // Se não existir, crie um novo objeto de total por nome
+            totaisPorNome[nome] = {
+                mes: "Todos",
+                dia: "Todos",
+                turno: item.turno,
+                nome: nome,
+                litros: item.litros,
+                valor: item.valor
+            };
+        }
     });
 
-    // Reordenar as linhas da tabela de acordo com a ordem dos valores de litros
-    var corpoTabela = document.getElementById("corpo-tabela");
-    for (var i = 0; i < valoresLitros.length; i++) {
-        var indice = valoresLitros.indexOf(parseFloat(celulasLitros[i].textContent)); // Encontrar o índice do valor
-        corpoTabela.appendChild(corpoTabela.children[indice].cloneNode(true)); // Adicionar a linha na posição correta
-    }
+    // Converta o objeto totaisPorNome em um array dadosCombinados
+    Object.keys(totaisPorNome).forEach(function(nome) {
+        var total = totaisPorNome[nome];
+        dadosCombinados.push({
+            turno: total.turno,
+            nome: total.nome,
+            litros: total.litros,
+            valor: total.valor
+        });
+    });
+
+    console.log(dadosCombinados);
+
+    // Adicione as linhas na tabela usando os dados combinados
+    dadosCombinados.forEach(function(item) {
+        adicionarLinhaTabela( item.turno, item.nome, item.litros, item.valor , item.valor*0.008);
+    });
 }
-
-

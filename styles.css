@@ -28,7 +28,16 @@ th {
     overflow-x: auto;
 }
 
+
+
 /* Responsividade */
 @media screen and (max-width: 600px) {
+    #mes,#dia{
+        display: none;
+    }
+
+    #dia {
+        display: none;
+    }
     
 }

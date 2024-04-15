@@ -11,34 +11,27 @@
     
     <label for="filtroMes">Mês:</label>
 <select id="filtroMes" onchange="filtrarVendas()">
-    <option value="">Todos</option>
-    <option value="Janeiro">Janeiro</option>
-    <option value="Fevereiro">Fevereiro</option>
+    <option value="Fevereiro">Abril</option>
     <!-- Adicione opções para os outros meses -->
 </select>
 
 <label for="filtroDia">Dia:</label>
 <select id="filtroDia" onchange="filtrarVendas()">
     <option value="">Todos</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
+    
     <!-- Adicione opções para os outros dias -->
 </select>
 
 <label for="filtroTurno">Turno:</label>
-<select id="filtroTurno" onchange="filtrarVendas()">
-    <option value="">Todos</option>
-    <option value="Manhã">Manhã</option>
+<select id="filtroTurno" onchange="">  
     <option value="Tarde">Tarde</option>
-    <option value="Noite">Noite</option>
 </select>
 
     <div class="table-responsive">
         <table id="tabela-vendas">
             <thead>
                 <tr>
-                    <th>Mês</th>
-                    <th>Dia</th>
+                    
                     <th>Turno</th>
                     <th>Funcionário</th>
                     <th id="litros">Litros</th>

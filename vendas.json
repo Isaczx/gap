@@ -1,0 +1,161 @@
+{
+    "vendas": [
+      {
+        "mes": "Janeiro",
+        "dias": [
+          {
+            "dia": 1,
+            "turnos": [
+             
+              {
+                "turno": "Tarde",
+                "vendedores": [
+                  {
+                    "nome": "Luiz",
+                    "quantidade_litros": 0,
+                    "valor_vendido": 0,
+                    "comissao": 60
+                  },
+                  {
+                    "nome": "Caio",
+                    "quantidade_litros": 385,
+                    "valor_vendido": 2156,
+                    "comissao": 80
+                  },
+
+                  {
+                    "nome": "Rafhael",
+                    "quantidade_litros": 279,
+                    "valor_vendido": 1564,
+                    "comissao": 60
+                  },
+                  {
+                    "nome": "Isac",
+                    "quantidade_litros": 470,
+                    "valor_vendido": 1564,
+                    "comissao": 80
+                  }
+                ]
+              }
+              
+            ]
+          },
+          {
+            "dia": 2,
+            "turnos": [
+             
+              {
+                "turno": "Tarde",
+                "vendedores": [
+                  {
+                    "nome": "Luiz",
+                    "quantidade_litros": 154,
+                    "valor_vendido": 0,
+                    "comissao": 60
+                  },
+                  {
+                    "nome": "Caio",
+                    "quantidade_litros": 404,
+                    "valor_vendido": 2156,
+                    "comissao": 80
+                  },
+
+                  {
+                    "nome": "Rafhael",
+                    "quantidade_litros": 120,
+                    "valor_vendido": 1564,
+                    "comissao": 60
+                  },
+                  {
+                    "nome": "Isac",
+                    "quantidade_litros": 604,
+                    "valor_vendido": 1564,
+                    "comissao": 80
+                  }
+                ]
+              }
+              
+            ]
+          },
+
+          {
+            "dia": 3,
+            "turnos": [
+             
+              {
+                "turno": "Tarde",
+                "vendedores": [
+                  {
+                    "nome": "Luiz",
+                    "quantidade_litros": 449,
+                    "valor_vendido": 2507,
+                    "comissao": 60
+                  },
+                  {
+                    "nome": "Caio",
+                    "quantidade_litros": 9,
+                    "valor_vendido": 2156,
+                    "comissao": 80
+                  },
+
+                  {
+                    "nome": "Rafhael",
+                    "quantidade_litros": 152,
+                    "valor_vendido": 1564,
+                    "comissao": 60
+                  },
+                  {
+                    "nome": "Isac",
+                    "quantidade_litros": 527,
+                    "valor_vendido": 1564,
+                    "comissao": 80
+                  }
+                ]
+              }
+              
+            ]
+          },
+
+          {
+            "dia": 3,
+            "turnos": [
+             
+              {
+                "turno": "Tarde",
+                "vendedores": [
+                  {
+                    "nome": "Luiz",
+                    "quantidade_litros": 396,
+                    "valor_vendido": 2215,
+                    "comissao": 60
+                  },
+                  {
+                    "nome": "Caio",
+                    "quantidade_litros": 260,
+                    "valor_vendido": 1453,
+                    "comissao": 80
+                  },
+
+                  {
+                    "nome": "Rafhael",
+                    "quantidade_litros": 142,
+                    "valor_vendido": 795,
+                    "comissao": 60
+                  },
+                  {
+                    "nome": "Isac",
+                    "quantidade_litros": 444,
+                    "valor_vendido": 2490,
+                    "comissao": 80
+                  }
+                ]
+              }
+              
+            ]
+          }
+        ]
+      }
+      
+    ]
+  }
+  
