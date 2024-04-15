@@ -86,15 +86,14 @@ function FiltroTodos() {
 
 console.log(dados)
 
-function adicionarLinhaTabela(turno, funcionario, litros, valor, comissao) {
+function adicionarLinhaTabela(funcionario, litros, valor, comissao) {
     var corpoTabela = document.getElementById("corpo-tabela");
 
     var novaLinha = corpoTabela.insertRow();
 
     
 
-    var celulaTurno = novaLinha.insertCell();
-    celulaTurno.textContent = turno;
+   
 
     var celulaFuncionario = novaLinha.insertCell();
     celulaFuncionario.textContent = funcionario;
@@ -153,6 +152,6 @@ function todos(dados) {
 
     // Adicione as linhas na tabela usando os dados combinados
     dadosCombinados.forEach(function(item) {
-        adicionarLinhaTabela( item.turno, item.nome, item.litros, item.valor , item.valor*0.008);
+        adicionarLinhaTabela(item.nome, item.litros, item.valor , item.valor*0.008);
     });
 }
